@@ -1,37 +1,31 @@
-// const input1Element: HTMLInputElement = document.querySelector('#input1');
-// const input2Element: HTMLInputElement = document.querySelector('#input2');
-// const addButtonElement = document.querySelector('button');
+/* <li>
+<label for="task-1">Wyrzucić śmieci</label>
+<input type="checkbox" id="task-1" name="Wyrzucić śmieci" />
+</li> */
+const taskNameInputElement: HTMLInputElement = document.querySelector("#name");
+const addButtonElement: HTMLButtonElement = document.querySelector("button");
 
-// const add = (v1: number, v2: number) => v1 + v2;
+const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
 
-// addButtonElement.addEventListener('click', () => {
-//     const sum = add(Number(input1Element.value), Number(input2Element.value));
-//     console.log(sum);
-// })
+const tasks: string[] = ["Wyrzucić śmieci", "Pójść na trening", "Nakarmić psa"];
 
-// UNION TYPE
-// const logAge = (age: number | string) => {
-//     console.log(`Hej, mam ${age} lat!`)
-// };
+const render = () => {
+    tasksContainerElement.innerHTML = "";
+    tasks.forEach(task => {
+        const taskElement: HTMLElement = document.createElement("li");
+        taskElement.innerText = task;
+        tasksContainerElement.appendChild(taskElement);
+    });
+};
 
-// logAge(28);
-// logAge('dwadzieścia osiem');
-// let test: string | number | boolean;
-// test = 'test';
-// test = 21;
-// test = true;
+const addTask = (task: string) => {
+    tasks.push(task);
+};
 
-// TYP BOOLEAN W PRAKTYCE
-const buttonElement = document.querySelector('button');
+addButtonElement.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    tasks.push(taskNameInputElement.value);
+    render();
+});
 
-const calculatePrice = (originalPrice: number, hasDiscount: boolean) => {
-    return hasDiscount ? originalPrice*0.8 : originalPrice;
-}
-
-buttonElement.addEventListener('click', () => {
-    const originalPrice: number = 50;
-    const hasDiscount: boolean = new URLSearchParams(
-        window.location.search
-        ).get('discount') === 'true';
-    console.log(calculatePrice(originalPrice, hasDiscount));
-})
+render();
