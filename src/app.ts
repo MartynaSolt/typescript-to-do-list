@@ -6,22 +6,29 @@ const taskNameInputElement: HTMLInputElement = document.querySelector("#name");
 const addButtonElement: HTMLButtonElement = document.querySelector("button");
 const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
 
-
-const tasks: {
-    name: string;
+interface Task {
+    title: string;
     done: boolean;
-}[] = [
+    category?: string;
+}
+
+const categories: string[] = ["general", "work", "gym", "hobby"];
+
+const tasks: Task[] = [
     {
-        name: "Wyrzucić śmieci",
+        title: "Wyrzucić śmieci",
         done: false,
+        category: "general",
     }, 
     {
-        name: "Pójść na trening",
+        title: "Pójść na trening",
         done: true,
+        category: "gym",
     },
     {
-        name: "Nakarmić psa",
+        title: "Nakarmić psa",
         done: false,
+        category: "work",
     },
 ];
 
@@ -29,14 +36,17 @@ const render = () => {
     tasksContainerElement.innerHTML = "";
     tasks.forEach((task, index) => {
         const taskElement: HTMLElement = document.createElement("li");
+        if (task.category) {
+            taskElement.classList.add(task.category);
+        }
         const id: string = `task-${index}`;
         const labelElement: HTMLLabelElement = document.createElement("label");
-        labelElement.innerText = task.name;
+        labelElement.innerText = task.title;
         labelElement.setAttribute("for", id);
 
         const checkboxElement: HTMLInputElement = document.createElement("input");
         checkboxElement.type = "checkbox";
-        checkboxElement.name = task.name;
+        checkboxElement.title = task.title;
         checkboxElement.id = id;
         checkboxElement.checked = task.done;
         checkboxElement.addEventListener("change", () => {
@@ -50,13 +60,13 @@ const render = () => {
     });
 };
 
-const addTask = (taskName: string) => {
-    tasks.push({ name: taskName, done: false });
+const addTask = (task: Task) => {
+    tasks.push(task);
 };
 
 addButtonElement.addEventListener("click", (event: Event) => {
     event.preventDefault();
-    addTask(taskNameInputElement.value);
+    addTask({ title: taskNameInputElement.value, done: false });
     render();
 });
 
