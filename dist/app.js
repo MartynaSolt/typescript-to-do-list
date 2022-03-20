@@ -1,5 +1,5 @@
 import renderTasks from "./helpers/render-tasks.helper.js";
-import { render as renderCategories } from "./helpers/render-categories.helper";
+import { render as renderCategories } from "./helpers/render-categories.helper.js";
 /* <li>
 <label for="task-1">Wyrzucić śmieci</label>
 <input type="checkbox" id="task-1" name="Wyrzucić śmieci" />
@@ -30,10 +30,13 @@ const tasks = [
 const addTask = (task) => {
     tasks.push(task);
 };
+const updateSelectedCategory = (newCategory) => {
+    selectedCategory = newCategory;
+};
 addButtonElement.addEventListener("click", (event) => {
     event.preventDefault();
     addTask({ title: taskNameInputElement.value, done: false, category: selectedCategory });
     renderTasks(tasks, tasksContainerElement);
 });
-renderCategories(categories, categoriesContainerElement, selectedCategory);
+renderCategories(categories, categoriesContainerElement, updateSelectedCategory);
 renderTasks(tasks, tasksContainerElement);
