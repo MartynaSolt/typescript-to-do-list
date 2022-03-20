@@ -1,17 +1,17 @@
-import { Category } from "../types/types";
+import { Category } from "../types/types.js";
 
 const handleCategoryChange = (category: Category) => {
-    if (category === "general") {
+    if (category === Category.GENERAL) {
         console.log("Zmiana na general");
-    } else if (category === "gym") {
+    } else if (category === Category.GYM) {
         alert("Lecisz na siłkę");
-    } else if (category === "hobby") {
+    } else if (category === Category.HOBBY) {
         document.body.style.background = "red";
-    } else if (category === "work") {
+    } else if (category === Category.WORK) {
         console.log("Zmiana na work");
         alert("Praca popłaca");
         document.body.style.background = "green";
-    } else if (category === "social") {
+    } else if (category === Category.SOCIAL) {
         document.body.style.background = "lightgray";
     } else {
         const never: never = category;
@@ -48,3 +48,4 @@ export const render = (
         categoriesContainerElement.appendChild(categoryElement);
     });
 };
+

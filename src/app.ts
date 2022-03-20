@@ -1,6 +1,6 @@
 import renderTasks from "./helpers/render-tasks.helper.js";
 import { render as renderCategories } from "./helpers/render-categories.helper.js";
-import { Task, Category } from "./types/types";
+import { Task, Category } from "./types/types.js";
 
 /* <li>
 <label for="task-1">Wyrzucić śmieci</label>
@@ -13,23 +13,29 @@ const categoriesContainerElement: HTMLElement = document.querySelector(".categor
 
 let selectedCategory: Category;
 
-const categories: Category[] = ["general", "work", "gym", "hobby", "social"];
+const categories: Category[] = [
+    Category.GENERAL,
+    Category.WORK,
+    Category.GYM,
+    Category.HOBBY,
+    Category.SOCIAL,
+];
 
 const tasks: Task[] = [
     {
         title: "Wyrzucić śmieci",
         done: false,
-        category: "general",
+        category: Category.GENERAL,
     }, 
     {
         title: "Pójść na trening",
         done: true,
-        category: "gym",
+        category: Category.GYM,
     },
     {
         title: "Nakarmić psa",
         done: false,
-        category: "work",
+        category: Category.WORK,
     },
 ];
 
