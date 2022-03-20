@@ -1,6 +1,7 @@
 import renderTasks from "./helpers/render-tasks.helper.js";
 import { render as renderCategories } from "./helpers/render-categories.helper.js";
 import { Task, Category } from "./types/types.js";
+import { TaskClass } from "./classes/task.js";
 
 /* <li>
 <label for="task-1">Wyrzucić śmieci</label>
@@ -22,21 +23,9 @@ const categories: Category[] = [
 ];
 
 const tasks: Task[] = [
-    {
-        title: "Wyrzucić śmieci",
-        done: false,
-        category: Category.GENERAL,
-    }, 
-    {
-        title: "Pójść na trening",
-        done: true,
-        category: Category.GYM,
-    },
-    {
-        title: "Nakarmić psa",
-        done: false,
-        category: Category.WORK,
-    },
+    new Task("Wyrzucić śmieci", false, Category.GENERAL),
+    new Task("Pójść na trening", true, Category.GYM),
+    new Task("Nakarmić psa", false, Category.WORK),
 ];
 
 const addTask = (task: Task) => {
@@ -49,12 +38,34 @@ const updateSelectedCategory = (newCategory: Category) => {
 
 addButtonElement.addEventListener("click", (event: Event) => {
     event.preventDefault();
-    addTask({ title: taskNameInputElement.value, done: false, category: selectedCategory });
+    const newTask: Task = new Task(
+        taskNameInputElement.value, 
+        false, 
+        selectedCategory
+    );
+    addTask(newTask);
+    newTask.logCreationDate();
     renderTasks(tasks, tasksContainerElement);
 });
+
+type TaskAsTuple = [string, Category, boolean];
+
+const task: TaskAsTuple = ["zrobić klatę", Category.GYM, false];
+
+const taskName = task[0];
+const taskCategory = task[1];
+const taskDoneStatus = task[2];
 
 renderCategories(
     categories, 
     categoriesContainerElement, 
     updateSelectedCategory);
 renderTasks(tasks, tasksContainerElement);
+
+
+const taskClassInstance = new TaskClass(
+    "Zadanie z konstruktora", 
+    false
+);
+
+console.log(taskClassInstance.title);

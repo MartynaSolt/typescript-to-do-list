@@ -1,4 +1,5 @@
-export class Task {
+import { Category } from "../types/types.js";
+export class TaskClass {
     constructor(title, done, category = Category.GENERAL) {
         this.title = "Nowe zadanie";
         this.done = true;
@@ -11,11 +12,3 @@ export class Task {
         console.log(`Task został stworzony ${this.createdAt}`);
     }
 }
-export var Category;
-(function (Category) {
-    Category["GENERAL"] = "general";
-    Category["WORK"] = "work";
-    Category["GYM"] = "gym";
-    Category["HOBBY"] = "hobby";
-    Category["SOCIAL"] = "social";
-})(Category || (Category = {}));

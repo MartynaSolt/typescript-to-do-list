@@ -1,4 +1,6 @@
-export class Task {
+import { Category } from "../types/types.js";
+
+export class TaskClass {
     public title: string = "Nowe zadanie";
     public done: boolean = true;
     public category?: Category;
@@ -20,10 +22,3 @@ export class Task {
     }
 }
 
-export enum Category {
-    GENERAL = "general",
-    WORK = "work",
-    GYM = "gym",
-    HOBBY = "hobby",
-    SOCIAL = "social",
-}
